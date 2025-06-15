@@ -24,7 +24,7 @@ font_path_secondary = "./fonnt/SplineSans-Bold.ttf"
 font_path_hashtag = "./fonnt/nunitoblackitalic.ttf"
 
 # --- Other Configurations ---
-text_secondary = "Sigma Cat"
+text_secondary = "The Unveiled Truth"
 TARGET_WIDTH, TARGET_HEIGHT = 1040, 2050
 font_size, font_size_secondary, font_size_hashtag = 60, 25, 30
 font_colors = ["#3A0000", "#41340A", "#360C2D", "#151057", "#0F3F0C"]
@@ -43,7 +43,7 @@ except json.JSONDecodeError:
 
 # --- Functions and Main Logic ---
 
-counter_ref = db.collection('metadata').document('post_counter')
+counter_ref = db.collection('metadata2').document('post_counter')
 try:
     doc = counter_ref.get()
     current_count = doc.to_dict().get('count', 0) if doc.exists else 0
