@@ -1,1 +1,31 @@
-g
+name: Daily Facebook Post
+
+on:
+  workflow_dispatch: # Isse aap manually bhi run kar sakte hain
+  schedule:
+    - cron: '0 */2 * * *' # <-- CHANGED: Ab yeh har 2 ghante mein chalega
+
+jobs:
+  build-and-post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests Pillow firebase-admin
+
+      - name: Run the script
+        env:
+          PAGE_ID: ${{ secrets.PAGE_ID }}
+          FB_ACCESS_TOKEN: ${{ secrets.FB_ACCESS_TOKEN }}
+          FIREBASE_KEY_JSON: ${{ secrets.FIREBASE_KEY_JSON }}
+        run: python main_script.py
