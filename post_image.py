@@ -1,9 +1,10 @@
 import os
 import random
-import cloudinary
-import cloudinary.uploader
 import requests
 import json
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api # <--- Add this line for the API module
 
 # Cloudinary Configuration (from GitHub Secrets)
 cloudinary.config(
@@ -38,6 +39,7 @@ def save_posted_image(image_url):
 
 def get_random_unposted_image_from_cloudinary():
     """Fetches a random unposted image from the 'Quotes' folder in Cloudinary."""
+    # Ensure cloudinary.api is correctly called
     resources = cloudinary.api.resources(type="upload", prefix="Quotes/", max_results=500)['resources']
     if not resources:
         print("No images found in the 'Quotes' folder.")
